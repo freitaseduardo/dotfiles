@@ -1,11 +1,9 @@
-# Install everything with: brew bundle --file ~/Code/dotfiles/Brewfile
+# Install everything with: brew bundle --file Brewfile
 
 tap "felixkratz/formulae"
 tap "nikitabobko/tap"
 
-# Dotfile management
 brew "git"
-brew "stow"
 
 # Shell
 brew "starship"            # prompt
