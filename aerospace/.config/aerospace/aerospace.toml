@@ -1,0 +1,117 @@
+# ~/.config/aerospace/aerospace.toml  (managed by ~/Code/dotfiles, package: aerospace)
+# Starter config for AeroSpace + FelixKratz's SketchyBar setup
+
+config-version = 2
+
+start-at-login = true
+auto-reload-config = true
+
+# SketchyBar is started by `brew services`, so nothing to launch here.
+after-startup-command = []
+
+# Tell SketchyBar which workspace is focused (drives the highlighted pill)
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+accordion-padding = 30
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Keep in sync with the `workspaces` list at the top of sketchybar/items/spaces.lua
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+key-mapping.preset = 'qwerty'
+
+# Felix's bar is 40px tall; top gap = bar height + 8.
+# Assumes the macOS menu bar is set to auto-hide "Always".
+gaps.inner.horizontal = 8
+gaps.inner.vertical   = 8
+gaps.outer.left       = 8
+gaps.outer.bottom     = 8
+gaps.outer.top        = 48
+gaps.outer.right      = 8
+
+[mode.main.binding]
+    # FelixKratz's skhd bindings, translated from yabai to AeroSpace.
+    # Directions use vim-style h/j/k/l = left/down/up/right
+    # (Felix's original uses j/k/l/ö on a German layout).
+
+    ## Navigation (alt)
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
+    alt-5 = 'workspace 5'
+    alt-6 = 'workspace 6'
+    alt-7 = 'workspace 7'
+    alt-8 = 'workspace 8'
+    alt-9 = 'workspace 9'
+
+    alt-h         = 'focus --boundaries all-monitors-outer-frame left'
+    alt-j         = 'focus --boundaries all-monitors-outer-frame down'
+    alt-k         = 'focus --boundaries all-monitors-outer-frame up'
+    alt-l = 'focus --boundaries all-monitors-outer-frame right'
+
+    alt-space   = 'layout floating tiling'         # float / unfloat
+    alt-shift-f = 'fullscreen'                     # zoom fullscreen
+
+    ## Window movement (alt + shift)
+    alt-shift-h         = 'move left'
+    alt-shift-j         = 'move down'
+    alt-shift-k         = 'move up'
+    alt-shift-l = 'move right'
+
+    alt-shift-s = 'layout horizontal vertical'     # toggle split orientation
+
+    alt-shift-1 = ['move-node-to-workspace 1', 'exec-and-forget sketchybar --trigger aerospace_windows_change']
+    alt-shift-2 = ['move-node-to-workspace 2', 'exec-and-forget sketchybar --trigger aerospace_windows_change']
+    alt-shift-3 = ['move-node-to-workspace 3', 'exec-and-forget sketchybar --trigger aerospace_windows_change']
+    alt-shift-4 = ['move-node-to-workspace 4', 'exec-and-forget sketchybar --trigger aerospace_windows_change']
+    alt-shift-5 = ['move-node-to-workspace 5', 'exec-and-forget sketchybar --trigger aerospace_windows_change']
+    alt-shift-6 = ['move-node-to-workspace 6', 'exec-and-forget sketchybar --trigger aerospace_windows_change']
+    alt-shift-7 = ['move-node-to-workspace 7', 'exec-and-forget sketchybar --trigger aerospace_windows_change']
+    alt-shift-8 = ['move-node-to-workspace 8', 'exec-and-forget sketchybar --trigger aerospace_windows_change']
+    alt-shift-9 = ['move-node-to-workspace 9', 'exec-and-forget sketchybar --trigger aerospace_windows_change']
+
+    alt-shift-p = ['move-node-to-workspace prev', 'workspace prev']
+    alt-shift-n = ['move-node-to-workspace next', 'workspace next']
+
+    ## Stacks (ctrl + shift) -> AeroSpace joins; use accordion for a real stack
+    ctrl-shift-h         = 'join-with left'
+    ctrl-shift-j         = 'join-with down'
+    ctrl-shift-k         = 'join-with up'
+    ctrl-shift-l = 'join-with right'
+
+    ctrl-shift-n = 'focus dfs-next'
+    ctrl-shift-p = 'focus dfs-prev'
+
+    ## Resize (ctrl + alt)
+    ctrl-alt-h         = 'resize width -100'
+    ctrl-alt-j         = 'resize height +100'
+    ctrl-alt-k         = 'resize height -100'
+    ctrl-alt-l = 'resize width +100'
+
+    ctrl-alt-e = 'balance-sizes'                   # equalize
+
+    ## Extras (not in Felix's config)
+    alt-comma   = 'layout accordion horizontal vertical'
+    alt-slash   = 'layout tiles horizontal vertical'
+    alt-shift-r = 'reload-config'
+
+    # Toggle sketchybar
+    alt-shift-space = 'exec-and-forget sketchybar --bar hidden=toggle'
+
+# Apps that behave better floating
+[[on-window-detected]]
+    if.app-id = 'com.apple.systempreferences'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.ActivityMonitor'
+    run = 'layout floating'
