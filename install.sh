@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Set up a Mac from this repo. Safe to run again (overwrites the configs in ~).
+# Set up a Mac after checking out the dotfiles into ~ (see README.md).
 set -euo pipefail
-cd "$(dirname "$0")"
+cd ~
 
 brew bundle --file Brewfile
 
@@ -12,7 +12,8 @@ curl -fsSL -o ~/Library/Fonts/sketchybar-app-font.ttf \
 [ -d ~/.oh-my-zsh ] || RUNZSH=no KEEP_ZSHRC=yes sh -c \
   "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-cp -R home/. ~
+# `cfg status` lists only tracked files, not all of ~
+git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" config status.showUntrackedFiles no
 
 brew services restart sketchybar
 open -a AeroSpace

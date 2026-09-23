@@ -5,25 +5,35 @@ with Starship.
 
 ## Setup
 
+The repo is checked out straight into your home folder: git data lives in
+`~/.dotfiles`, the files are the real `~/.zshrc`, `~/.config/...`.
+Existing files with the same names are not overwritten (checkout stops).
+
 Install [Homebrew](https://brew.sh), then:
 
 ```bash
-git clone <repo-url> dotfiles && dotfiles/install.sh
+git clone --bare <repo-url> ~/.dotfiles
+git --git-dir=$HOME/.dotfiles --work-tree=$HOME checkout
+~/install.sh
 ```
 
 Then allow AeroSpace and SketchyBar in System Settings → Privacy &
-Security → Accessibility. Optional: `./macos.sh` (auto-hides the menu bar).
+Security → Accessibility. Optional: `~/macos.sh` (auto-hides the menu bar).
 
 ## Usage
 
-`home/` mirrors your home folder and is copied into it. The copies are
-independent of the repo:
+`cfg` (an alias in `.zshrc`) is git for this repo. Edit configs in place,
+then:
 
-- Repo → machine: `cp -R home/. ~` (or rerun `install.sh`)
-- Machine → repo: copy the file back, e.g. `cp ~/.zshrc home/`
+```bash
+cfg status                      # only tracked files are listed
+cfg commit -am "Tweak bar"
+cfg add ~/.config/foo/config    # track a new file; add by name, never `cfg add .`
+cfg push
+```
 
 Secrets and machine-specific shell settings go in `~/.zshrc.local`, which
-is not in the repo.
+is not tracked.
 
 ## Key bindings (AeroSpace)
 
@@ -51,7 +61,7 @@ Vim-style directions.
 
 - `.venv` folders are activated automatically when you `cd` into a
   project and deactivated when you leave.
-- Workspaces in `home/.config/sketchybar/settings.sh` must match
+- Workspaces in `~/.config/sketchybar/settings.sh` must match
   `persistent-workspaces` in `aerospace.toml`.
 - Bar errors: `brew services stop sketchybar`, then run `sketchybar` in a
   terminal to see them.

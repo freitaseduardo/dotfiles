@@ -65,6 +65,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 
 # =============================================================================
+# Dotfiles: bare repo in ~/.dotfiles, working tree is ~ (see ~/README.md)
+# =============================================================================
+alias cfg='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+
+# =============================================================================
 # Machine-local settings and secrets (not in the repo)
 # =============================================================================
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
