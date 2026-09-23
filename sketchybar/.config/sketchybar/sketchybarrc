@@ -1,5 +1,52 @@
-#!/usr/bin/env lua
+#!/bin/bash
+# SketchyBar config: plain shell, no Lua or compiled helpers.
+#   items/    adds and styles the bar items (sourced once, in bar order)
+#   plugins/  scripts SketchyBar runs on events and clicks
+#   helpers/  background streams that fire custom events
 
--- Load the sketchybar-package and prepare the helper binaries
-require("helpers")
-require("init")
+source "$CONFIG_DIR/settings.sh"
+PLUGINS="$CONFIG_DIR/plugins"
+HELPERS="$CONFIG_DIR/helpers"
+
+sketchybar --bar height=40 color=$BAR_COLOR padding_left=2 padding_right=2
+
+sketchybar --default \
+  updates=when_shown \
+  padding_left=5 padding_right=5 \
+  scroll_texts=on \
+  icon.font="$FONT:Bold:14.0" \
+  icon.color=$WHITE \
+  icon.padding_left=$PADDINGS icon.padding_right=$PADDINGS \
+  icon.background.image.corner_radius=9 \
+  label.font="$FONT:Semibold:13.0" \
+  label.color=$WHITE \
+  label.padding_left=$PADDINGS label.padding_right=$PADDINGS \
+  background.height=28 \
+  background.corner_radius=9 \
+  background.border_width=2 \
+  background.border_color=$BG2 \
+  background.image.corner_radius=9 \
+  background.image.border_color=$GREY \
+  background.image.border_width=1 \
+  popup.background.border_width=2 \
+  popup.background.corner_radius=9 \
+  popup.background.border_color=$POPUP_BORDER \
+  popup.background.color=$POPUP_BG \
+  popup.background.shadow.drawing=on \
+  popup.blur_radius=50
+
+# Left side, left to right
+source "$CONFIG_DIR/items/apple.sh"
+source "$CONFIG_DIR/items/menus.sh"
+source "$CONFIG_DIR/items/spaces.sh"
+source "$CONFIG_DIR/items/front_app.sh"
+
+# Right side, right to left
+source "$CONFIG_DIR/items/calendar.sh"
+source "$CONFIG_DIR/items/battery.sh"
+source "$CONFIG_DIR/items/volume.sh"
+source "$CONFIG_DIR/items/wifi.sh"
+source "$CONFIG_DIR/items/cpu.sh"
+source "$CONFIG_DIR/items/media.sh"
+
+sketchybar --update

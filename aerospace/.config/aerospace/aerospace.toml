@@ -1,5 +1,5 @@
 # ~/.config/aerospace/aerospace.toml  (managed by ~/Code/dotfiles, package: aerospace)
-# Starter config for AeroSpace + FelixKratz's SketchyBar setup
+# AeroSpace config, paired with the SketchyBar config in this repo
 
 config-version = 2
 
@@ -23,12 +23,12 @@ default-root-container-orientation = 'auto'
 
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
-# Keep in sync with the `workspaces` list at the top of sketchybar/items/spaces.lua
+# Keep in sync with WORKSPACES in sketchybar/settings.sh
 persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 key-mapping.preset = 'qwerty'
 
-# Felix's bar is 40px tall; top gap = bar height + 8.
+# The bar is 40px tall; top gap = bar height + 8.
 # Assumes the macOS menu bar is set to auto-hide "Always".
 gaps.inner.horizontal = 8
 gaps.inner.vertical   = 8
@@ -38,9 +38,7 @@ gaps.outer.top        = 48
 gaps.outer.right      = 8
 
 [mode.main.binding]
-    # FelixKratz's skhd bindings, translated from yabai to AeroSpace.
-    # Directions use vim-style h/j/k/l = left/down/up/right
-    # (Felix's original uses j/k/l/ö on a German layout).
+    # Directions use vim-style h/j/k/l = left/down/up/right.
 
     ## Navigation (alt)
     alt-1 = 'workspace 1'
@@ -99,7 +97,7 @@ gaps.outer.right      = 8
 
     ctrl-alt-e = 'balance-sizes'                   # equalize
 
-    ## Extras (not in Felix's config)
+    ## Layouts and misc
     alt-comma   = 'layout accordion horizontal vertical'
     alt-slash   = 'layout tiles horizontal vertical'
     alt-shift-r = 'reload-config'

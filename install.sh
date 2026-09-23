@@ -4,8 +4,8 @@
 set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PACKAGES=(aerospace sketchybar)          # stow packages (folders in this repo)
-APP_FONT_VERSION="v2.0.28"               # must match sketchybar/helpers/app_icons.lua
+PACKAGES=(aerospace sketchybar zsh starship)  # stow packages (folders in this repo)
+APP_FONT_VERSION="v2.0.28"               # must match sketchybar/helpers/icon_map.sh
 BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
 log() { printf '\n\033[1;34m==> %s\033[0m\n' "$1"; }
@@ -21,21 +21,18 @@ fi
 log "Installing Brewfile packages"
 brew bundle --file "$DOTFILES/Brewfile"
 
-# 3. SbarLua (Lua bindings for SketchyBar, not on Homebrew)
-if [ ! -f "$HOME/.local/share/sketchybar_lua/sketchybar.so" ]; then
-  log "Installing SbarLua"
-  tmp="$(mktemp -d)"
-  git clone --depth 1 https://github.com/FelixKratz/SbarLua.git "$tmp/SbarLua"
-  (cd "$tmp/SbarLua" && make install)
-  rm -rf "$tmp"
-fi
-
-# 4. App icon font for the workspace pills
+# 3. App icon font for the workspace pills
 font="$HOME/Library/Fonts/sketchybar-app-font.ttf"
 if [ ! -f "$font" ]; then
   log "Installing sketchybar-app-font $APP_FONT_VERSION"
   curl -fsSL -o "$font" \
     "https://github.com/kvndrsslr/sketchybar-app-font/releases/download/$APP_FONT_VERSION/sketchybar-app-font.ttf"
+fi
+
+# 4. Oh My Zsh (the zsh config sources it)
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  log "Installing Oh My Zsh"
+  RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 # 5. Back up real (non-symlink) configs that would block stow
@@ -50,6 +47,8 @@ backup() {
 backup "$HOME/.config/sketchybar"
 backup "$HOME/.config/aerospace"
 backup "$HOME/.aerospace.toml"   # AeroSpace refuses to start if two configs exist
+backup "$HOME/.zshrc"
+backup "$HOME/.config/starship.toml"
 
 # 6. Symlink configs into $HOME
 log "Linking configs with stow"

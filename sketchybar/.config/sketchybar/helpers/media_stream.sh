@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ~/.config/sketchybar/helpers/media_stream.sh
+# Now-playing stream (started by items/media.sh).
 # Streams now-playing info from media-control and forwards it to SketchyBar
 # as the custom `media_update` event. Replaces SketchyBar's built-in
 # `media_change` event, which stopped working in macOS 15.4.

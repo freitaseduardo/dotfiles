@@ -1,12 +1,12 @@
 # macOS
 .DS_Store
 
-# Compiled SketchyBar helpers (rebuilt automatically on start)
-bin/
-
 # Secrets never go in this repo
 *.env
 .env*
 *secret*
 *.pem
 *.key
+
+# zsh completion cache
+.zcompdump*

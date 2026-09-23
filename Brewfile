@@ -7,15 +7,21 @@ tap "nikitabobko/tap"
 brew "git"
 brew "stow"
 
+# Shell
+brew "starship"            # prompt
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+brew "pyenv"
+brew "uv"
+
 # Window manager + bar
 cask "nikitabobko/tap/aerospace"
 brew "felixkratz/formulae/sketchybar"
-brew "lua"                 # SketchyBar config is written in Lua (SbarLua)
 
 # SketchyBar widget dependencies
 brew "switchaudio-osx"     # volume widget: switch output device
 brew "media-control"       # now-playing widget (works on macOS 15.4+)
-brew "jq"                  # parses media-control output
+brew "jq"                  # parses media-control output and bar queries
 
 # Fonts used by the bar
 cask "sf-symbols"
