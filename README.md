@@ -9,16 +9,21 @@ The repo is checked out straight into your home folder: git data lives in
 `~/.dotfiles`, the files are the real `~/.zshrc`, `~/.config/...`.
 Existing files with the same names are not overwritten (checkout stops).
 
-Install [Homebrew](https://brew.sh), then:
+On a fresh Mac (use the HTTPS repo URL; SSH keys aren't set up yet):
 
 ```bash
-git clone --bare <repo-url> ~/.dotfiles
-git --git-dir=$HOME/.dotfiles --work-tree=$HOME checkout
-~/install.sh
+bash <(curl -fsSL <raw-url-of-install.sh>) <repo-url>
 ```
 
+It installs Homebrew (which brings the Xcode Command Line Tools and git),
+clones the bare repo into `~/.dotfiles` and checks it out into `~`, then
+installs the Brewfile, the app icon font, Oh My Zsh and nvm, and applies
+the macOS settings in `macos.sh` (log out afterwards for all of them to
+take effect). Anything
+already present is skipped, so `~/install.sh` is safe to rerun.
+
 Then allow AeroSpace and SketchyBar in System Settings → Privacy &
-Security → Accessibility. Optional: `~/macos.sh` (auto-hides the menu bar).
+Security → Accessibility.
 
 ## Usage
 
