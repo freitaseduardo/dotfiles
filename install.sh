@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Set up a Mac from scratch. Safe to run again: anything present is skipped.
-#   Fresh Mac:  bash <(curl -fsSL <raw-url-of-this-file>) <repo-url>
+#   Fresh Mac:  bash <(curl -fsSL https://raw.githubusercontent.com/freitaseduardo/dotfiles/main/install.sh)
 #   Later:      ~/install.sh
 set -euo pipefail
 
-REPO_URL="${1:-}"
+REPO_URL="${1:-https://github.com/freitaseduardo/dotfiles.git}"
 NVM_VERSION="v0.40.8"
 APP_FONT_VERSION="v2.0.28"   # must match ~/.config/sketchybar/helpers/icon_map.sh
 
@@ -20,7 +20,6 @@ fi
 
 # Dotfiles: bare repo in ~/.dotfiles, checked out into ~
 if [ ! -d ~/.dotfiles ]; then
-  [ -n "$REPO_URL" ] || { echo "Usage: $0 <repo-url>" >&2; exit 1; }
   log "Checking out dotfiles into ~"
   git clone --bare "$REPO_URL" ~/.dotfiles
   cfg checkout   # stops without overwriting if a file already exists; move it and rerun

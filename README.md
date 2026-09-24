@@ -9,10 +9,10 @@ The repo is checked out straight into your home folder: git data lives in
 `~/.dotfiles`, the files are the real `~/.zshrc`, `~/.config/...`.
 Existing files with the same names are not overwritten (checkout stops).
 
-On a fresh Mac (use the HTTPS repo URL; SSH keys aren't set up yet):
+On a fresh Mac:
 
 ```bash
-bash <(curl -fsSL <raw-url-of-install.sh>) <repo-url>
+bash <(curl -fsSL https://raw.githubusercontent.com/freitaseduardo/dotfiles/main/install.sh)
 ```
 
 It installs Homebrew (which brings the Xcode Command Line Tools and git),
