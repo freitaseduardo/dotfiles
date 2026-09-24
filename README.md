@@ -1,7 +1,7 @@
 # dotfiles
 
-macOS setup: AeroSpace (window manager), SketchyBar (status bar) and zsh
-with Starship.
+macOS setup: AeroSpace (window manager), SketchyBar (status bar),
+JankyBorders (window borders), and zsh with Starship.
 
 ## Setup
 

@@ -15,6 +15,7 @@ brew "uv"
 # Window manager + bar
 cask "nikitabobko/tap/aerospace"
 brew "felixkratz/formulae/sketchybar"
+brew "felixkratz/formulae/borders"  # window borders
 
 # SketchyBar widget dependencies
 brew "switchaudio-osx"     # volume widget: switch output device

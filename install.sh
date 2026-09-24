@@ -29,7 +29,7 @@ cfg config status.showUntrackedFiles no
 
 log "Installing Brewfile packages"
 # Homebrew only loads formulae from third-party taps once they're trusted
-brew trust --formula felixkratz/formulae/sketchybar
+brew trust --formula felixkratz/formulae/sketchybar felixkratz/formulae/borders
 brew trust --cask nikitabobko/tap/aerospace
 brew bundle --file ~/Brewfile
 
@@ -52,8 +52,9 @@ fi
 log "Applying macOS settings"
 ~/macos.sh
 
-log "Starting SketchyBar and AeroSpace"
+log "Starting SketchyBar, borders and AeroSpace"
 brew services restart sketchybar
+brew services restart borders
 open -a AeroSpace
 
 log "Done. Allow AeroSpace and SketchyBar in System Settings → Privacy & Security → Accessibility."
